@@ -1,4 +1,12 @@
 venv/
+.venv/
 __pycache__/
 .env
-questdb_data/
+questdb_data/.venv/
+data/
+logs/
+.pytest_cache/
+*.egg-info/
+dist/
+build/
+private/

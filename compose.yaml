@@ -1,0 +1,15 @@
+services:
+  questdb:
+    image: questdb/questdb:10.0.1
+    container_name: funding-monitor-questdb
+    restart: unless-stopped
+    ports:
+      - "9000:9000" # Web console, REST API, and HTTP ILP ingestion
+      - "8812:8812" # PostgreSQL wire protocol
+      - "9009:9009" # TCP ILP ingestion
+      - "9003:9003" # Health endpoint
+    volumes:
+      - questdb-data:/var/lib/questdb
+
+volumes:
+  questdb-data:

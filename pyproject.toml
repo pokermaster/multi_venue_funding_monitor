@@ -1,0 +1,26 @@
+[build-system]
+requires = ["setuptools>=68"]
+build-backend = "setuptools.build_meta"
+
+[project]
+name = "multi-venue-funding-monitor"
+version = "0.1.0"
+description = "Async multi-venue basis and funding research monitor"
+requires-python = ">=3.11"
+dependencies = []
+
+[project.optional-dependencies]
+live = ["ccxt==4.5.76"]
+dev = ["pytest>=8,<9"]
+
+[project.scripts]
+funding-monitor = "funding_monitor.app:main"
+
+[tool.setuptools]
+py-modules = ["engine", "feed_handler"]
+
+[tool.setuptools.packages.find]
+include = ["funding_monitor*"]
+
+[tool.pytest.ini_options]
+testpaths = ["tests"]
