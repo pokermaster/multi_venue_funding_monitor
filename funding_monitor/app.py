@@ -43,8 +43,21 @@ async def live_producer(monitor, config):
     try:
         while True:
             try:
+                print("STARTING DISCOVERY", flush=True)
+                start = time.perf_counter()
                 instruments = await discover(config)
+                print(
+                    "DISCOVERY FINISHED:",
+                    len(instruments),
+                    "instruments in",
+                    time.perf_counter() - start,
+                    "seconds",
+                    flush=True
+                )
+                print("INSTRUMENT COUNT:", len(instruments), flush=True) # debug statement
+                print("ABOUT TO SELECT UNIVERSE", flush=True) # debug statement
                 routes, ranking = select_universe(instruments, config)
+                print("FINISHED SELECTING UNIVERSE", len(routes), flush=True) # debug statement
                 monitor.publish(record("ranking", "live", {"ranking": ranking,
                                        "quote_usd": config.quote_usd, "synthetic": False}))
                 accepted = gate.accept(routes)

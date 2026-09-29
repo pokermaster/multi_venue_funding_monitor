@@ -1,0 +1,25 @@
+{
+  "venues": ["binance", "bybit", "hyperliquid"],
+  "assets": [],
+  "bucket_size": 5,
+  "min_spot_volume_usd": 1000000,
+  "min_perp_volume_usd": 1000000,
+  "refresh_seconds": 10,
+  "selection_confirmations": 2,
+  "quote_usd": {"USDT": 1.0, "USDC": 1.0},
+  "allow_proxy_signals": false,
+  "trade_notional_usd": 1000,
+  "holding_days": 30,
+  "round_trip_slippage_bps": 10,
+  "fees": {
+    "binance:spot": 0.001,
+    "binance:perp": 0.0005,
+    "bybit:spot": 0.001,
+    "bybit:perp": 0.00055,
+    "hyperliquid:perp": 0.00045
+  },
+  "financing": {},
+  "storage": "questdb",
+  "questdb_url": "http://127.0.0.1:9000/write?precision=n",
+  "sqlite_path": "data/monitor.sqlite3"
+}

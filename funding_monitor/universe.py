@@ -2,8 +2,11 @@
 from collections import defaultdict
 from .models import Route
 
+print("LOADED universe.py:", __file__, flush=True)
+
 
 def select_universe(instruments, config):
+    print("ENTERED select_universe", flush=True)
     spots, perps = defaultdict(list), defaultdict(list)
     for instrument in instruments:
         if instrument.base in config.excluded_bases:
@@ -12,7 +15,10 @@ def select_universe(instruments, config):
         floor = config.min_spot_volume_usd if instrument.kind == "spot" else config.min_perp_volume_usd
         if instrument.volume_usd >= floor:
             target[instrument.base].append(instrument)
+    print("SPOT Bases:", spots.keys())
+    print("PERP Bases:", perps.keys())
     eligible = spots.keys() & perps.keys()
+    print("ELIGIBLE:", eligible)
     ranked = sorted(eligible, key=lambda base: (-sum(x.volume_usd for x in spots[base]), base))
     if config.assets:
         selected = {b: "manual" for b in config.assets if b in eligible}
